@@ -142,9 +142,9 @@ V(t)=V_C + RC\frac{dV_C}{dt} + LC\frac{d^2V_C}{dt^2}
 \label{eq3}
 \end{equation}
 
-\subsection*{Caso de estudio}
+\section*{Caso de estudio}
 
-Se propone como caso de estudio uno donde el voltaje $V(t)$ es una función escalón, tal que sea nulo antes de $t=0$, y que valga $2$ en $t\in\left[0,\infty\right)$. Lo anterior queda planteado mas formalmente como \eqref{escln}. Se obvian las unidades puesto que se asume que se trabaja con todas en el sistema internacional.
+Se propone como caso de estudio un circuito tal cual la figura \ref{fig:rlcserie}, donde el voltaje $V(t)$ es una función escalón, tal que sea nulo antes de $t=0$, y que valga $2$ en $t\in\left[0,\infty\right)$. Lo anterior queda planteado más formalmente como \eqref{escln}. Tambien consideraremos, por mera conveniencia, $R=1\Omega$, $C=1F$ y $L=1H$, todas unidades en el sistema internacional, así que a partir de aquí podríamos obviar las indicaciones de unidades salvo para dar resultados.
 
 \begin{equation}
 V(r)= \left\{ \begin{array}{lcc}
@@ -156,9 +156,38 @@ V(r)= \left\{ \begin{array}{lcc}
 \end{equation}
 \\
 
-La situación descrita por \eqref{escln} implica que $V_C= \forall  t\leq 0$, o dicho de otra manera, que el capacitor estaría inicialmente descargado. Que $V_C$ sea constante para $t<0$ implica, como dicta \eqref{icap}, que $I=0$ para el mismo intércalo. La expresión \eqref{vind} exige que $I$ sea una función contínua respecto al tiempo (de lo contrario $V_L$ no sería finito), por lo que puede asegurarse que $I_{t=0}=0$. Dado que conocemos la relación entre la corriente $I$ y el voltaje $V_C$, todo el análisis de este párrafo nos permite obtener las conduciones iniciales para \eqref{eq3}.\\ \\ 
+\subsection*{Cuando $t<0$}
 
-Tambien consideraremos, por meca conveniencia, $C=1F$, $R=1\Omega$ y $L=1H$. Dado que todas estas son unidades en el sistema internacional, y conociendo tanto \eqref{eq3} como las condiciones iniciales, podemos finalmente plantear el PVI \eqref{pvi}.\\
+Si analizamos el circuito con $V(t)=0$, y asumiento que el ciercuito ha pasado tanto tiempo en estas condiciones que alcanzó el regimen estacionario, entonces $\frac{dI}{dt}=0$. Así que escribimos
+
+\begin{equation}
+V(t)=RI+V_C+L\frac{dI}{dt}=RI+V_C+L(0)=0\longrightarrow V_C=-RI
+\label{vca0}
+\end{equation}
+ Como $\frac{dI}{dt}=0$ el valor de $I$ debe ser constante, y según \eqref{vca0} tambien debería serlo $V_C$. El condensador no puede mantener un voltaje constante mientras se descarga \eqref{qcap}, por lo que la corriente $I$ debe ser nula, y con ello tambien el voltaje $V_C$.
+ 
+\subsection*{Cuando $t\geq0$}
+
+
+
+
+
+La situación descrita por \eqref{escln} implica que $V_C=0\Vert\forall  t\leq 0$, por lo que el capacitor ha de estar descargado ($V_C=0$) en este intervalo. Que $V_C$ sea constante para $t<0$ implica, como dicta \eqref{icap}, que $I=0$ para el mismo intérvalo. La expresión \eqref{vind} exige que $I$ sea una función contínua respecto al tiempo (de lo contrario $V_L$ no sería finito), por lo que puede asegurarse que $I_{t=0}=0$. .\\ \\ 
+
+Así pues, substituyendo los valores de $R=1$, $L=1$ y $C=1$, se puede escribir la EDO del problema, a partir de la expresión  \eqref{eq3} como:
+
+\begin{equation*}
+V(t)=V_C + RC\frac{dV_C}{dt} + LC\frac{d^2V_C}{dt^2}=V_C + (1)(1)\frac{dV_C}{dt} + (1)(1)\frac{d^2V_C}{dt^2}
+\end{equation*}
+
+De manera que la EDO que rige la dinámica del circuito es \eqref{edo}
+
+\begin{equation}
+V_C + \frac{dV_C}{dt} + \frac{d^2V_C}{dt^2}-V(t)=0
+\label{edo}
+\end{equation}
+
+ Como conocemos tanto \eqref{eq3} como las condiciones iniciales, podemos finalmente plantear el PVI \eqref{pvi}. Nótese que $V(t)=2 \Vert \forall  t\geq 0$, por eso no aparece en \eqref{pvi} sino que se ubstituye por su valor numérico.\\ 
 
 
 \begin{equation}
@@ -167,25 +196,50 @@ Tambien consideraremos, por meca conveniencia, $C=1F$, $R=1\Omega$ y $L=1H$. Dad
              \\V_C(0)=0\\
              \\ \frac{dV_C}{dt}(0)=0
              \end{array}\\
-   \right.
+   \right. \forall  t\geq 0
 \label{pvi}
 \end{equation}\\
 
 Para resolver este problema nos apoyaremos del uso de la transformada de Laplace. El objetivo es determinar $I$, pero para ello será necesario el cálculo de $V_C$ a partir del PVI \eqref{pvi}.
-\subsubsection*{Solución analítica}
+\subsection*{Solución analítica}
 
 Se cualcula la transformada de Laplace de la EDO correspondiente al PVI.
-
+\begin{equation*}
+L\{V_C + \frac{dV_C}{dt} + \frac{d^2V_C}{dt^2}-2\}=0
+\end{equation*}
 \begin{equation*}
 L\{V_C\}-V_C(0)+sL\{V_C\}-sV_C(0)-\frac{dV_C}{dt}(0)+s^2L\{V_C\}-2/s=0
 \end{equation*}
-\\ \\ Simplificando
-\begin{equation*}
+
+
+Simplificando lo anterior al considerar $V_C(0)=0$ y $\frac{dV_C}{dt}(0)=0$, como plantea \eqref{pvi}.
+\begin{equation}
 \begin{array}{lcc}
 (1+s+s^2)L\{ V_C \}=\frac{2}{s} & \longrightarrow & L\{V_C\}=\frac{2}{s(1+s+s^2)}\\
 \end{array}
+\label{lvc}
+\end{equation}
+\\ 
+
+Vale la pena estudiar los polos de la expresión obtenida en \eqref{lvc}, para esto buscamos las raices de $s(1+s+s^2)$. La primera de las raices (trivial) es $s_1=0$, las otras se obtienen a partir de $(1+s+s^2)$.
+\begin{equation*}
+1+s+s^2 \longrightarrow a=1, b=1,c=1
 \end{equation*}
-\\ \\ Ahora se aplica la transformada inversa de Laplace y se obtiene como resultado .
+\begin{equation*}
+s=\frac{-1\pm\sqrt{(1)^2-4(1)(1)}}{2(1)} \longrightarrow s=\frac{-1\pm\sqrt{-3}}{2}
+\end{equation*}
+
+\begin{equation}
+\begin{matrix}
+s_1=0&s_2=-\frac{1}{2}+i\frac{\sqrt{3}}{2}&s_3=-\frac{1}{2}-i\frac{\sqrt{3}}{2}
+\end{matrix}
+\label{polos}
+\end{equation}
+\\ 
+
+Como vemos en \eqref{polos}, se tiene un polo en en origen y dos plos complejos con parte real negativa, por lo que el sistema es subamortiguado.\\ \\
+ 
+Al aplicar la transformada inversa de Laplace sobre \eqref{lvc} se obtiene como resultado \eqref{vc1}.
 
 \begin{equation}
 V_C(t)=2-2e^{-t/2}cos\left( \frac{\sqrt{3}t}{2}\right) -\frac{2}{\sqrt{3}t}e^{-t/2}sen\left( \frac{\sqrt{3}t}{2}\right) 
@@ -195,12 +249,12 @@ V_C(t)=2-2e^{-t/2}cos\left( \frac{\sqrt{3}t}{2}\right) -\frac{2}{\sqrt{3}t}e^{-t
 Derivando $V_C$ obtenemos una expresion para la intensidad de corriente \eqref{it1}. Esto es posible debido a \eqref{icap} con $C=1$.
 
 \begin{equation}
-I(t)=\frac{4e^{-2t/2}sen\left( \frac{\sqrt{3}t}{2}\right)}{\sqrt{3}}
+I(t)=\frac{4e^{-t/2}sen\left( \frac{\sqrt{3}t}{2}\right)}{\sqrt{3}}
 \label{it1}
 \end{equation}
 
 \newpage
-\subsubsection*{Simulación del circuito}
+\subsection*{Simulación del circuito}
 
 Utilizando el software libre \textit{QUCS} es posible recrear el circuito correspondiente al caso de estudio, así los vemos en la figura \ref{fig:circ}.
 
@@ -226,8 +280,8 @@ Acá se agregan un medidor de tensión eléctrica entre los extremos del capacit
 \label{fig:vcg}
 \end{figure}
 
-\subsubsection*{Análisis de resultados}
+\subsection*{Análisis de resultados}
 
-Tanto $V_C$ como $I$ presentan un comportamiento similar, oscilan de manera amortiguada en torno a un valor de equilibrio, estos serían $V_C=2v$ e $I=0$, lo que tiene mucho sentido cuando consideramos que este sería el comportamiento esperable en un régimen estacionario (o cuando $t \longrightarrow \infty$). Este comportamiento además concuerda con las soluciones náliticas obtenidas para el las variables $V_C$ \eqref{vc1} e $I$ \eqref{it1}.
+Tanto $V_C$ como $I$ presentan un comportamiento similar, oscilan de manera amortiguada en torno a un valor de equilibrio, estos serían $V_C=2v$ e $I=0$, lo que tiene mucho sentido cuando consideramos que este sería el comportamiento esperable en un régimen estacionario (o cuando $t \longrightarrow \infty$). Este comportamiento además concuerda con las soluciones náliticas obtenidas para el las variables $V_C$ \eqref{vc1} e $I$ \eqref{it1}. De igual manera, se confirma que el comportamiento es subamortiguado, tal como indica en análisis de polos de la función, cuyo resultado se plantea en \eqref{polos}.
 
 \end{document}
